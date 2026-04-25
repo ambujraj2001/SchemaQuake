@@ -37,6 +37,7 @@ def _check_trl(errors: List[str]) -> None:
     except Exception as exc:
         errors.append(f"import `trl` failed: {exc!r}")
         return
+    print(f"[preflight] trl={getattr(trl, '__version__', 'unknown')}")
 
     if hasattr(trl, "GRPOConfig") and hasattr(trl, "GRPOTrainer"):
         print(f"[preflight] trl={getattr(trl, '__version__', 'unknown')} (top-level GRPO exports)")

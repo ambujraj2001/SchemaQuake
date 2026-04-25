@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir \
         "transformers>=4.44,<4.50" \
         "peft>=0.12,<0.14" \
         "accelerate>=0.33,<0.35" \
-        "trl>=0.12,<0.13" \
+        "trl==0.12.2" \
         "datasets>=2.20" \
         "bitsandbytes>=0.43" \
         "openenv-core>=0.2.3" \
@@ -35,7 +35,9 @@ RUN pip install --no-cache-dir \
         "gradio>=4.40" \
         "xformers==0.0.27.post2" \
         --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --no-cache-dir --no-deps "unsloth==2024.10.7" "unsloth-zoo==2024.11.0"
+    pip install --no-cache-dir --no-deps "unsloth==2024.10.7" "unsloth-zoo==2024.11.0" && \
+    pip install --no-cache-dir --force-reinstall --no-deps \
+        "trl==0.12.2" "transformers==4.46.3" "tokenizers==0.20.3"
 
 # 3. Re-pin torch/torchvision in case any transitive dep tried to upgrade them.
 RUN pip install --no-cache-dir --force-reinstall --no-deps \
