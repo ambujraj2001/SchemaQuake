@@ -23,7 +23,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
         --index-url https://download.pytorch.org/whl/cu121
 
 # 2. Install heavy ML deps before COPY so source edits don't bust the cache.
-#    --no-deps on unsloth prevents it from yanking torch back to a bad version.
 RUN pip install --no-cache-dir \
         "transformers>=4.44,<4.50" \
         "peft>=0.12,<0.14" \
@@ -36,11 +35,11 @@ RUN pip install --no-cache-dir \
         "gradio>=4.40" \
         "xformers==0.0.27.post2" \
         --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --no-cache-dir --no-deps "unsloth==2024.10.7" "unsloth-zoo"
+    pip install --no-cache-dir "unsloth==2024.10.7" "unsloth-zoo"
 
 # 3. Re-pin torch/torchvision in case any transitive dep tried to upgrade them.
 RUN pip install --no-cache-dir --force-reinstall --no-deps \
-        torch==2.4.0 torchvision==0.19.0 \
+        torch==2.4.0 torchvision==0.19.0 xformers==0.0.27.post2 \
         --index-url https://download.pytorch.org/whl/cu121
 
 # 4. Project source goes last so code-only edits use the cached pip layers.
