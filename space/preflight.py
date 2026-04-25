@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import os
+import pkgutil
 import sys
 from typing import List
 
@@ -22,24 +23,55 @@ def _check_import(mod: str, errors: List[str]) -> object | None:
 
 
 def _check_trl(errors: List[str]) -> None:
-    # Support both top-level and nested symbols depending on TRL build.
+    # Support top-level, known nested paths, and discovery by scanning TRL modules.
     try:
-        from trl import GRPOConfig, GRPOTrainer  # noqa: F401
-        return
-    except Exception:
-        pass
-    try:
-        from trl.trainer.grpo_config import GRPOConfig  # noqa: F401
-        from trl.trainer.grpo_trainer import GRPOTrainer  # noqa: F401
-        return
-    except Exception:
-        pass
-    try:
-        # Some TRL versions keep both symbols in grpo_trainer.py.
-        from trl.trainer.grpo_trainer import GRPOConfig, GRPOTrainer  # noqa: F401
-        return
+        import trl
     except Exception as exc:
-        errors.append(f"GRPO symbols unavailable in `trl`: {exc!r}")
+        errors.append(f"import `trl` failed: {exc!r}")
+        return
+
+    if hasattr(trl, "GRPOConfig") and hasattr(trl, "GRPOTrainer"):
+        print(f"[preflight] trl={getattr(trl, '__version__', 'unknown')} (top-level GRPO exports)")
+        return
+
+    candidates = [
+        "trl.trainer.grpo_config",
+        "trl.trainer.grpo_trainer",
+        "trl.trainer.grpo",
+        "trl.trainer",
+    ]
+    for mod_name in candidates:
+        try:
+            mod = importlib.import_module(mod_name)
+        except Exception:
+            continue
+        if hasattr(mod, "GRPOConfig") and hasattr(mod, "GRPOTrainer"):
+            print(
+                f"[preflight] trl={getattr(trl, '__version__', 'unknown')} "
+                f"(GRPO from {mod_name})"
+            )
+            return
+
+    try:
+        for m in pkgutil.walk_packages(trl.__path__, prefix="trl."):
+            if "grpo" not in m.name.lower():
+                continue
+            try:
+                mod = importlib.import_module(m.name)
+            except Exception:
+                continue
+            if hasattr(mod, "GRPOConfig") and hasattr(mod, "GRPOTrainer"):
+                print(
+                    f"[preflight] trl={getattr(trl, '__version__', 'unknown')} "
+                    f"(GRPO discovered in {m.name})"
+                )
+                return
+    except Exception:
+        pass
+
+    errors.append(
+        "GRPO symbols unavailable in `trl` after scanning known and discovered paths"
+    )
 
 
 def main() -> int:

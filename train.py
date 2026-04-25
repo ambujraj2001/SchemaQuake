@@ -20,8 +20,10 @@ Usage:
 from __future__ import annotations
 
 import json
+import importlib
 import logging
 import os
+import pkgutil
 import re
 import sys
 import warnings
@@ -40,22 +42,49 @@ import torch
 from datasets import Dataset
 from unsloth import FastLanguageModel
 
-try:
-    from trl import GRPOConfig, GRPOTrainer
-except ImportError:
-    # Some TRL builds do not re-export GRPO symbols at package top-level.
-    try:
-        from trl.trainer.grpo_config import GRPOConfig
-        from trl.trainer.grpo_trainer import GRPOTrainer
-    except Exception:
+def _resolve_grpo_symbols():
+    import trl
+
+    # 1) Common top-level export.
+    if hasattr(trl, "GRPOConfig") and hasattr(trl, "GRPOTrainer"):
+        return trl.GRPOConfig, trl.GRPOTrainer
+
+    # 2) Known internal module layouts across TRL versions.
+    candidates = [
+        "trl.trainer.grpo_config",
+        "trl.trainer.grpo_trainer",
+        "trl.trainer.grpo",
+        "trl.trainer",
+    ]
+    for mod_name in candidates:
         try:
-            # In some TRL layouts, both symbols live in grpo_trainer.py.
-            from trl.trainer.grpo_trainer import GRPOConfig, GRPOTrainer
-        except Exception as e:
-            raise ImportError(
-                "GRPO is unavailable in the installed `trl` build. "
-                "Install a TRL build exposing GRPOConfig/GRPOTrainer."
-            ) from e
+            mod = importlib.import_module(mod_name)
+        except Exception:
+            continue
+        if hasattr(mod, "GRPOConfig") and hasattr(mod, "GRPOTrainer"):
+            return mod.GRPOConfig, mod.GRPOTrainer
+
+    # 3) Last resort: search TRL package modules for GRPO symbols.
+    try:
+        for m in pkgutil.walk_packages(trl.__path__, prefix="trl."):
+            if "grpo" not in m.name.lower():
+                continue
+            try:
+                mod = importlib.import_module(m.name)
+            except Exception:
+                continue
+            if hasattr(mod, "GRPOConfig") and hasattr(mod, "GRPOTrainer"):
+                return mod.GRPOConfig, mod.GRPOTrainer
+    except Exception:
+        pass
+
+    raise ImportError(
+        "GRPO is unavailable in the installed `trl` build. "
+        "Could not find GRPOConfig/GRPOTrainer in top-level or trainer modules."
+    )
+
+
+GRPOConfig, GRPOTrainer = _resolve_grpo_symbols()
 
 from schemaquake.env import SchemaQuakeEnv
 from schemaquake.prompts import SYSTEM_PROMPT
