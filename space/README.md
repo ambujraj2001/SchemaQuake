@@ -15,20 +15,37 @@ Runs `train.py` once on the Space's GPU, saves the LoRA adapter under
 `runs/schemaquake_grpo/final`, and uploads it to the Hugging Face Hub
 if `HF_TOKEN` and `HF_REPO_ID` are configured as Space secrets.
 
-## Setup
+## How it's deployed
 
-1. Create a new Space:
+The `Dockerfile` at the **repository root** is what HF builds. It
+`COPY`s the whole repo into the image, installs deps, and runs
+`space/app.py` as the entrypoint. No GitHub round-trip on rebuild.
+
+## One-time setup
+
+1. Create a private Space on Hugging Face:
    - SDK: **Docker**
-   - Visibility: **Private**
-2. Push **only** the contents of `space/` to the Space repo:
-   - `Dockerfile`
-   - `app.py`
-   - `README.md` (this file)
-3. Settings -> Hardware: pick **1x Nvidia L4** ($0.80/hr) or **A100 large** ($2.50/hr).
-4. Settings -> Variables and secrets:
-   - `HF_TOKEN`     - HF write token
-   - `HF_REPO_ID`   - target model repo, e.g. `ambujraj2001/schemaquake-grpo-lora`
-5. Open the Space - training starts automatically.
+   - Hardware: **1x Nvidia L4** (`$0.80/hr`) recommended
+2. Settings → Variables and secrets:
+   - Secret `HF_TOKEN`     — HF write token
+   - Secret `HF_REPO_ID`   — e.g. `ambujraj2001/schemaquake-grpo-lora`
+
+## Pushing code directly (no GitHub round-trip)
+
+From your local clone of this repo:
+
+```bash
+# one-time
+git remote add space https://huggingface.co/spaces/<user>/<space-name>
+
+# every deploy
+git push space main:main --force
+```
+
+When prompted: **username = your HF username**, **password = an HF
+write token** (Settings → Access Tokens on huggingface.co).
+
+The Space rebuilds automatically on each push.
 
 ## Tuning
 
@@ -41,4 +58,5 @@ SQ_NUM_GEN=4
 SQ_BATCH=4
 SQ_GRAD_ACCUM=1
 SQ_LR=1e-5
+SQ_MAX_STEPS=12
 ```
