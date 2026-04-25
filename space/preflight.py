@@ -32,6 +32,12 @@ def _check_trl(errors: List[str]) -> None:
         from trl.trainer.grpo_config import GRPOConfig  # noqa: F401
         from trl.trainer.grpo_trainer import GRPOTrainer  # noqa: F401
         return
+    except Exception:
+        pass
+    try:
+        # Some TRL versions keep both symbols in grpo_trainer.py.
+        from trl.trainer.grpo_trainer import GRPOConfig, GRPOTrainer  # noqa: F401
+        return
     except Exception as exc:
         errors.append(f"GRPO symbols unavailable in `trl`: {exc!r}")
 
