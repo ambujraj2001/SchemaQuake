@@ -6,7 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     HF_HOME=/tmp/hf_home \
     TRANSFORMERS_VERBOSITY=error \
-    TRANSFORMERS_NO_ADVISORY_WARNINGS=1
+    TRANSFORMERS_NO_ADVISORY_WARNINGS=1 \
+    MKL_THREADING_LAYER=GNU \
+    MKL_SERVICE_FORCE_INTEL=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git ca-certificates curl \

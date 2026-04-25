@@ -26,6 +26,9 @@ import re
 import sys
 import warnings
 
+os.environ.setdefault("MKL_THREADING_LAYER", "GNU")
+os.environ.setdefault("MKL_SERVICE_FORCE_INTEL", "1")
+
 warnings.filterwarnings("ignore")
 os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
