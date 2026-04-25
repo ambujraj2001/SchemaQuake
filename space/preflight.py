@@ -51,10 +51,15 @@ def main() -> int:
     _check_import("peft", errors)
     _check_import("accelerate", errors)
     _check_import("bitsandbytes", errors)
-    _check_import("unsloth", errors)
-    _check_import("unsloth_zoo", errors)
     _check_import("trl", errors)
-    _check_trl(errors)
+    # Build containers in HF Space run without GPU driver. Unsloth import can
+    # touch CUDA immediately, so gate that to runtime only.
+    if args.build_check:
+        print("[preflight] build-check: skipping unsloth + GRPO symbol checks")
+    else:
+        _check_import("unsloth", errors)
+        _check_import("unsloth_zoo", errors)
+        _check_trl(errors)
 
     if torch is not None and tv is not None:
         tver = getattr(torch, "__version__", "unknown")

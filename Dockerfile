@@ -35,7 +35,7 @@ RUN pip install --no-cache-dir \
         "gradio>=4.40" \
         "xformers==0.0.27.post2" \
         --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install --no-cache-dir "unsloth==2024.10.7" "unsloth-zoo"
+    pip install --no-cache-dir --no-deps "unsloth==2024.10.7" "unsloth-zoo==2024.11.0"
 
 # 3. Re-pin torch/torchvision in case any transitive dep tried to upgrade them.
 RUN pip install --no-cache-dir --force-reinstall --no-deps \
