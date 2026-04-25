@@ -47,6 +47,9 @@ COPY . /app
 
 RUN pip install --no-cache-dir -e ".[dev,agents]"
 
+# 5. Validate core import/runtime compatibility at build time.
+RUN python space/preflight.py --build-check
+
 EXPOSE 7860
 
 CMD ["python", "space/app.py"]

@@ -72,6 +72,24 @@ def upload_adapter() -> None:
 
 
 def run_training() -> None:
+    _append("running preflight checks")
+    preflight = subprocess.run(
+        [sys.executable, "-u", "space/preflight.py"],
+        cwd=REPO_ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    if preflight.stdout:
+        with open(LOG_FILE, "a") as f:
+            f.write(preflight.stdout)
+        sys.stdout.write(preflight.stdout)
+        sys.stdout.flush()
+    if preflight.returncode != 0:
+        _append("preflight failed; not starting train.py")
+        open(DONE_FILE, "w").write(str(preflight.returncode))
+        return
+
     _append("starting train.py")
     cmd = [sys.executable, "-u", "train.py"]
     proc = subprocess.Popen(
