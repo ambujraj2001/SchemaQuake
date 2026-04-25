@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schemaquake"
+version = "0.1.0"
+description = "Drift-native OpenEnv environment for training LLM agents that notice when the world changes under them."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ambuj Raj" }]
+keywords = ["openenv", "rl", "llm", "agents", "schema-drift", "hackathon"]
+dependencies = [
+    "openenv-core>=0.2.3",
+    "pydantic>=2.5",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-asyncio>=0.23", "ruff>=0.4"]
+demo = ["gradio>=4.40"]
+agents = ["openai>=1.30"]
+
+[project.scripts]
+schemaquake-eval = "schemaquake.cli:eval_main"
+schemaquake-play = "schemaquake.cli:play_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+schemaquake = ["data/*.json", "data/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --tb=short"

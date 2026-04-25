@@ -1,0 +1,228 @@
+{
+  "schema_version": "v1",
+  "currency": "INR",
+  "price_unit": "rupees",
+  "refundable_field": "refundable",
+  "flights": [
+    {
+      "id": "F-101",
+      "from": "BLR",
+      "to": "DEL",
+      "depart": "2026-05-02T06:30",
+      "arrive": "2026-05-02T09:15",
+      "airline": "IndiGo",
+      "price": 5400,
+      "refundable": true,
+      "seats_left": 12
+    },
+    {
+      "id": "F-102",
+      "from": "BLR",
+      "to": "DEL",
+      "depart": "2026-05-02T08:00",
+      "arrive": "2026-05-02T10:45",
+      "airline": "Air India",
+      "price": 7200,
+      "refundable": true,
+      "seats_left": 4
+    },
+    {
+      "id": "F-103",
+      "from": "BLR",
+      "to": "DEL",
+      "depart": "2026-05-02T14:20",
+      "arrive": "2026-05-02T17:05",
+      "airline": "Vistara",
+      "price": 8800,
+      "refundable": true,
+      "seats_left": 9
+    },
+    {
+      "id": "F-104",
+      "from": "BLR",
+      "to": "DEL",
+      "depart": "2026-05-02T21:10",
+      "arrive": "2026-05-02T23:55",
+      "airline": "IndiGo",
+      "price": 3900,
+      "refundable": false,
+      "seats_left": 2
+    },
+    {
+      "id": "F-105",
+      "from": "BLR",
+      "to": "DEL",
+      "depart": "2026-05-02T05:00",
+      "arrive": "2026-05-02T07:45",
+      "airline": "SpiceJet",
+      "price": 4100,
+      "refundable": false,
+      "seats_left": 1
+    },
+    {
+      "id": "F-201",
+      "from": "BLR",
+      "to": "BOM",
+      "depart": "2026-05-03T07:00",
+      "arrive": "2026-05-03T08:40",
+      "airline": "IndiGo",
+      "price": 3200,
+      "refundable": true,
+      "seats_left": 20
+    },
+    {
+      "id": "F-202",
+      "from": "BLR",
+      "to": "BOM",
+      "depart": "2026-05-03T11:30",
+      "arrive": "2026-05-03T13:10",
+      "airline": "Vistara",
+      "price": 4600,
+      "refundable": true,
+      "seats_left": 6
+    },
+    {
+      "id": "F-203",
+      "from": "BLR",
+      "to": "BOM",
+      "depart": "2026-05-03T18:15",
+      "arrive": "2026-05-03T19:55",
+      "airline": "Air India",
+      "price": 4200,
+      "refundable": true,
+      "seats_left": 8
+    },
+    {
+      "id": "F-204",
+      "from": "BLR",
+      "to": "BOM",
+      "depart": "2026-05-03T22:00",
+      "arrive": "2026-05-03T23:40",
+      "airline": "IndiGo",
+      "price": 2800,
+      "refundable": false,
+      "seats_left": 3
+    },
+    {
+      "id": "F-301",
+      "from": "BLR",
+      "to": "HYD",
+      "depart": "2026-05-04T06:45",
+      "arrive": "2026-05-04T07:55",
+      "airline": "IndiGo",
+      "price": 2400,
+      "refundable": true,
+      "seats_left": 15
+    },
+    {
+      "id": "F-302",
+      "from": "BLR",
+      "to": "HYD",
+      "depart": "2026-05-04T13:00",
+      "arrive": "2026-05-04T14:10",
+      "airline": "Vistara",
+      "price": 3300,
+      "refundable": true,
+      "seats_left": 5
+    },
+    {
+      "id": "F-303",
+      "from": "BLR",
+      "to": "HYD",
+      "depart": "2026-05-04T19:30",
+      "arrive": "2026-05-04T20:40",
+      "airline": "Air India",
+      "price": 2900,
+      "refundable": true,
+      "seats_left": 11
+    },
+    {
+      "id": "F-401",
+      "from": "BLR",
+      "to": "MAA",
+      "depart": "2026-05-05T07:15",
+      "arrive": "2026-05-05T08:10",
+      "airline": "IndiGo",
+      "price": 1900,
+      "refundable": true,
+      "seats_left": 18
+    },
+    {
+      "id": "F-402",
+      "from": "BLR",
+      "to": "MAA",
+      "depart": "2026-05-05T12:40",
+      "arrive": "2026-05-05T13:35",
+      "airline": "SpiceJet",
+      "price": 1700,
+      "refundable": false,
+      "seats_left": 2
+    },
+    {
+      "id": "F-403",
+      "from": "BLR",
+      "to": "MAA",
+      "depart": "2026-05-05T20:00",
+      "arrive": "2026-05-05T20:55",
+      "airline": "IndiGo",
+      "price": 2100,
+      "refundable": true,
+      "seats_left": 7
+    },
+    {
+      "id": "F-501",
+      "from": "DEL",
+      "to": "BLR",
+      "depart": "2026-05-06T06:00",
+      "arrive": "2026-05-06T08:45",
+      "airline": "IndiGo",
+      "price": 5100,
+      "refundable": true,
+      "seats_left": 14
+    },
+    {
+      "id": "F-502",
+      "from": "DEL",
+      "to": "BLR",
+      "depart": "2026-05-06T15:00",
+      "arrive": "2026-05-06T17:45",
+      "airline": "Vistara",
+      "price": 7400,
+      "refundable": true,
+      "seats_left": 3
+    },
+    {
+      "id": "F-503",
+      "from": "DEL",
+      "to": "BLR",
+      "depart": "2026-05-06T22:30",
+      "arrive": "2026-05-07T01:15",
+      "airline": "IndiGo",
+      "price": 3700,
+      "refundable": false,
+      "seats_left": 4
+    },
+    {
+      "id": "F-601",
+      "from": "BOM",
+      "to": "GOI",
+      "depart": "2026-05-07T09:20",
+      "arrive": "2026-05-07T10:30",
+      "airline": "Vistara",
+      "price": 3600,
+      "refundable": true,
+      "seats_left": 10
+    },
+    {
+      "id": "F-602",
+      "from": "BOM",
+      "to": "GOI",
+      "depart": "2026-05-07T16:40",
+      "arrive": "2026-05-07T17:50",
+      "airline": "IndiGo",
+      "price": 2900,
+      "refundable": false,
+      "seats_left": 2
+    }
+  ]
+}

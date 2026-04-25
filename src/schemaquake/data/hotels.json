@@ -1,0 +1,23 @@
+{
+  "schema_version": "v1",
+  "currency": "INR",
+  "price_unit": "rupees",
+  "refundable_field": "refundable",
+  "hotels": [
+    {"id": "H-DEL-01", "city": "DEL", "name": "Aerocity Grand",      "stars": 4, "price_per_night": 4200, "refundable": true,  "rooms_left": 6},
+    {"id": "H-DEL-02", "city": "DEL", "name": "Connaught Residency", "stars": 5, "price_per_night": 7800, "refundable": true,  "rooms_left": 3},
+    {"id": "H-DEL-03", "city": "DEL", "name": "Paharganj Backpackers","stars": 2, "price_per_night": 1400, "refundable": false, "rooms_left": 11},
+    {"id": "H-BOM-01", "city": "BOM", "name": "Bandra Sea View",     "stars": 4, "price_per_night": 5400, "refundable": true,  "rooms_left": 4},
+    {"id": "H-BOM-02", "city": "BOM", "name": "Colaba Heritage",     "stars": 5, "price_per_night": 9200, "refundable": true,  "rooms_left": 2},
+    {"id": "H-BOM-03", "city": "BOM", "name": "Andheri Quick Stay",  "stars": 3, "price_per_night": 2600, "refundable": false, "rooms_left": 8},
+    {"id": "H-HYD-01", "city": "HYD", "name": "HiTec Park Suites",   "stars": 4, "price_per_night": 3800, "refundable": true,  "rooms_left": 7},
+    {"id": "H-HYD-02", "city": "HYD", "name": "Charminar Boutique",  "stars": 3, "price_per_night": 2200, "refundable": true,  "rooms_left": 5},
+    {"id": "H-MAA-01", "city": "MAA", "name": "Marina Breeze",       "stars": 4, "price_per_night": 3100, "refundable": true,  "rooms_left": 9},
+    {"id": "H-MAA-02", "city": "MAA", "name": "T Nagar Lodge",       "stars": 2, "price_per_night": 1200, "refundable": false, "rooms_left": 12},
+    {"id": "H-GOI-01", "city": "GOI", "name": "Baga Beach Resort",   "stars": 4, "price_per_night": 4600, "refundable": true,  "rooms_left": 4},
+    {"id": "H-GOI-02", "city": "GOI", "name": "Panjim Riverside",    "stars": 3, "price_per_night": 2800, "refundable": true,  "rooms_left": 6},
+    {"id": "H-BLR-01", "city": "BLR", "name": "Indiranagar Stays",   "stars": 3, "price_per_night": 2400, "refundable": true,  "rooms_left": 10},
+    {"id": "H-BLR-02", "city": "BLR", "name": "Whitefield Exec",     "stars": 4, "price_per_night": 3900, "refundable": true,  "rooms_left": 5},
+    {"id": "H-BLR-03", "city": "BLR", "name": "Majestic Budget",     "stars": 2, "price_per_night": 1100, "refundable": false, "rooms_left": 14}
+  ]
+}
