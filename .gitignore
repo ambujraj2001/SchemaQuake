@@ -16,3 +16,4 @@ artifacts/
 *.log
 .env
 eval_results/
+*.pdf
