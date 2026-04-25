@@ -24,6 +24,14 @@ def _check_import(mod: str, errors: List[str]) -> object | None:
 
 def _check_trl(errors: List[str]) -> None:
     # Support top-level, known nested paths, and discovery by scanning TRL modules.
+    # Unsloth may patch TRL to add GRPO classes, so try that first.
+    try:
+        from unsloth import FastLanguageModel, PatchFastRL
+        PatchFastRL("GRPO", FastLanguageModel)
+    except Exception:
+        # Keep scanning/diagnostics below; missing patch should surface naturally.
+        pass
+
     try:
         import trl
     except Exception as exc:

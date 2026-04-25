@@ -40,7 +40,10 @@ sys.path.insert(0, os.path.join(REPO_ROOT, "src"))
 
 import torch
 from datasets import Dataset
-from unsloth import FastLanguageModel
+from unsloth import FastLanguageModel, PatchFastRL
+
+# Unsloth patches TRL with GRPO support at runtime.
+PatchFastRL("GRPO", FastLanguageModel)
 
 def _resolve_grpo_symbols():
     import trl
