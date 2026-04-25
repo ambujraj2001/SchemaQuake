@@ -38,8 +38,20 @@ sys.path.insert(0, os.path.join(REPO_ROOT, "src"))
 
 import torch
 from datasets import Dataset
-from trl import GRPOConfig, GRPOTrainer
 from unsloth import FastLanguageModel
+
+try:
+    from trl import GRPOConfig, GRPOTrainer
+except ImportError:
+    # Some TRL builds do not re-export GRPO symbols at package top-level.
+    try:
+        from trl.trainer.grpo_config import GRPOConfig
+        from trl.trainer.grpo_trainer import GRPOTrainer
+    except Exception as e:
+        raise ImportError(
+            "GRPO is unavailable in the installed `trl` build. "
+            "Install `trl>=0.12` (or a compatible Unsloth/TRL combo)."
+        ) from e
 
 from schemaquake.env import SchemaQuakeEnv
 from schemaquake.prompts import SYSTEM_PROMPT

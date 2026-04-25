@@ -28,7 +28,7 @@ RUN pip install --no-cache-dir \
         "transformers>=4.44,<4.50" \
         "peft>=0.12,<0.14" \
         "accelerate>=0.33,<0.35" \
-        "trl>=0.11,<0.13" \
+        "trl>=0.12,<0.13" \
         "datasets>=2.20" \
         "bitsandbytes>=0.43" \
         "openenv-core>=0.2.3" \
